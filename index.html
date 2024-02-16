@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translation Website</title>
 </head>
 <body>
     <h1>Translation Website</h1>
     
-    <div>
-        <label for="fromLanguage">Translate From:</label>
-        <input type="text" id="fromLanguage" name="fromLanguage">
-    </div>
+    <label for="from-language">Translate From:</label>
+    <select id="from-language">
+        <option value="english">English</option>
+        <option value="russian">Russian</option>
+        <option value="french">French</option>
+        <option value="spanish">Spanish</option>
+        <option value="mandarin">Mandarin</option>
+    </select>
     
-    <div>
-        <label for="toLanguage">Translate To:</label>
-        <input type="text" id="toLanguage" name="toLanguage">
-    </div>
+    <label for="to-language">Translate To:</label>
+    <select id="to-language">
+        <option value="english">English</option>
+        <option value="russian">Russian</option>
+        <option value="french">French</option>
+        <option value="spanish">Spanish</option>
+        <option value="mandarin">Mandarin</option>
+    </select>
     
-    <div>
-        <textarea id="inputText" name="inputText" rows="5" cols="50"></textarea>
-    </div>
+    <textarea id="input-text" rows="5" cols="50"></textarea>
     
-    <div>
-        <button onclick="translate()">Translate</button>
-    </div>
+    <button id="translate-button">Translate</button>
     
-    <div>
-        <h2>Translated Text:</h2>
-        <p id="translatedText"></p>
-    </div>
+    <div id="translated-text"></div>
     
     <script>
-        function translate() {
-            var fromLanguage = document.getElementById("fromLanguage").value;
-            var toLanguage = document.getElementById("toLanguage").value;
-            var inputText = document.getElementById("inputText").value;
+        const translateButton = document.getElementById('translate-button');
+        const inputText = document.getElementById('input-text');
+        const fromLanguage = document.getElementById('from-language');
+        const toLanguage = document.getElementById('to-language');
+        const translatedText = document.getElementById('translated-text');
+        
+        translateButton.addEventListener('click', () => {
+            const text = inputText.value;
+            const from = fromLanguage.value;
+            const to = toLanguage.value;
             
-            // Code to translate the inputText from the fromLanguage to the toLanguage
+            // Perform translation logic here
             
-            document.getElementById("translatedText").innerHTML = translatedText;
-        }
+            translatedText.textContent = translatedText;
+        });
     </script>
 </body>
 </html>
