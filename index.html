@@ -1,53 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translation Website</title>
-</head>
-<body>
-    <h1>Translation Website</h1>
+<label for="from-language">Translate From:</label>
+<select id="from-language">
+    <option value="english">English</option>
+    <option value="russian">Russian</option>
+    <option value="french">French</option>
+    <option value="spanish">Spanish</option>
+    <option value="mandarin">Mandarin</option>
+</select>
+
+<label for="to-language">Translate To:</label>
+<select id="to-language">
+    <option value="english">English</option>
+    <option value="russian">Russian</option>
+    <option value="french">French</option>
+    <option value="spanish">Spanish</option>
+    <option value="mandarin">Mandarin</option>
+</select>
+
+<textarea id="input-text" rows="5" cols="50"></textarea>
+
+<button id="translate-button">Translate</button>
+
+<div id="translated-text"></div>
+
+<script>
+    const translateButton = document.getElementById('translate-button');
+    const inputText = document.getElementById('input-text');
+    const fromLanguage = document.getElementById('from-language');
+    const toLanguage = document.getElementById('to-language');
+    const translatedText = document.getElementById('translated-text');
     
-    <label for="from-language">Translate From:</label>
-    <select id="from-language">
-        <option value="english">English</option>
-        <option value="russian">Russian</option>
-        <option value="french">French</option>
-        <option value="spanish">Spanish</option>
-        <option value="mandarin">Mandarin</option>
-    </select>
-    
-    <label for="to-language">Translate To:</label>
-    <select id="to-language">
-        <option value="english">English</option>
-        <option value="russian">Russian</option>
-        <option value="french">French</option>
-        <option value="spanish">Spanish</option>
-        <option value="mandarin">Mandarin</option>
-    </select>
-    
-    <textarea id="input-text" rows="5" cols="50"></textarea>
-    
-    <button id="translate-button">Translate</button>
-    
-    <div id="translated-text"></div>
-    
-    <script>
-        const translateButton = document.getElementById('translate-button');
-        const inputText = document.getElementById('input-text');
-        const fromLanguage = document.getElementById('from-language');
-        const toLanguage = document.getElementById('to-language');
-        const translatedText = document.getElementById('translated-text');
+    translateButton.addEventListener('click', () => {
+        const text = inputText.value;
+        const from = fromLanguage.value;
+        const to = toLanguage.value;
         
-        translateButton.addEventListener('click', () => {
-            const text = inputText.value;
-            const from = fromLanguage.value;
-            const to = toLanguage.value;
-            
-            // Perform translation logic here
-            
-            translatedText.textContent = translatedText;
-        });
-    </script>
-</body>
-</html>
+        // Perform translation logic here
+        fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&explaintext&redirects=1&titles=${text}`)
+            .then(response => response.json())
+            .then(data => {
+                const pages = data.query.pages;
+                const pageId = Object.keys(pages)[0];
+                const translation = pages[pageId].extract;
+                translatedText.textContent = translation;
+            })
+            .catch(error => {
+                console.log(error);
+                translatedText.textContent = "Translation failed. Please try again.";
+            });
+    });
+</script>
