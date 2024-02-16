@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Translation Website</title>
+    <title>Translation Website</title>
 </head>
 <body>
-  <h1>Welcome to the Translation Website</h1>
-  
-  <form>
-    <label for="language">Select Language:</label>
-    <select id="language" name="language">
-      <option value="english">English</option>
-      <option value="spanish">Spanish</option>
-      <option value="french">French</option>
-      <option value="german">German</option>
-      <!-- Add more language options here -->
-    </select>
-    <br>
-    <input type="submit" value="Translate">
-  </form>
-  
-  <!-- Add translation results here -->
-  
+    <h1>Translation Website</h1>
+    
+    <div>
+        <label for="fromLanguage">Translate From:</label>
+        <input type="text" id="fromLanguage" name="fromLanguage">
+    </div>
+    
+    <div>
+        <label for="toLanguage">Translate To:</label>
+        <input type="text" id="toLanguage" name="toLanguage">
+    </div>
+    
+    <div>
+        <textarea id="inputText" name="inputText" rows="5" cols="50"></textarea>
+    </div>
+    
+    <div>
+        <button onclick="translate()">Translate</button>
+    </div>
+    
+    <div>
+        <h2>Translated Text:</h2>
+        <p id="translatedText"></p>
+    </div>
+    
+    <script>
+        function translate() {
+            var fromLanguage = document.getElementById("fromLanguage").value;
+            var toLanguage = document.getElementById("toLanguage").value;
+            var inputText = document.getElementById("inputText").value;
+            
+            // Code to translate the inputText from the fromLanguage to the toLanguage
+            
+            document.getElementById("translatedText").innerHTML = translatedText;
+        }
+    </script>
 </body>
 </html>
